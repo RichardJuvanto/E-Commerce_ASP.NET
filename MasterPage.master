@@ -1,0 +1,279 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+
+        .auto-style2 {
+            color: #3399FF;
+        }
+
+            .auto-style2:hover {
+                text-decoration: none;
+            }
+
+        .slider {
+            width: 800px;
+            height: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .slides {
+            width: 500%;
+            height: 350px;
+            display: flex;
+            overflow: hidden;
+        }
+
+            .slides input {
+                display: none;
+            }
+
+        .slide {
+            width: 20%;
+            transition: 2s;
+        }
+
+            .slide img {
+                width: 800px;
+                height: 350px;
+            }
+
+        .navigation-manual {
+            position: absolute;
+            width: 800px;
+            margin-top: -40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .manual-btn {
+            border: 2px solid #40D4DC;
+            padding: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 1s;
+        }
+
+            .manual-btn:not(:last-child) {
+                margin-right: 40px;
+            }
+
+            .manual-btn:hover {
+                background: #40D4DC;
+            }
+
+        #radio1:checked ~ .first {
+            margin-left: 0;
+        }
+
+        #radio2:checked ~ .first {
+            margin-left: -20%;
+        }
+
+        .navigation-auto {
+            position: absolute;
+            display: flex;
+            width: 800px;
+            justify-content: center;
+            margin-top: 310px;
+        }
+
+            .navigation-auto div {
+                border: 2px solid #40D3DC;
+                padding: 5px;
+                border-radius: 10px;
+                transition: 1s;
+            }
+
+                .navigation-auto div:not(:last-child) {
+                    margin-right: 40px;
+                }
+
+        #radio1:checked ~ .navigation-auto .auto-btn1 {
+            background: #40D3DC;
+        }
+
+        #radio2:checked ~ .navigation-auto .auto-btn2 {
+            background: #40D3DC;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>E-Commerce</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <table class="auto-style1">
+                <tr>
+                    <td>
+                        <!-- Topbar -->
+                        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                            <h2>
+                                <asp:LinkButton ID="LinkButton1" runat="server" CssClass="auto-style2 mx-5" PostBackUrl="~/Index.aspx"> 
+                             E-Commerce
+                                </asp:LinkButton>
+                            </h2>
+                            <!--Kategori-->
+                            <li class="navbar-nav dropdown ml-3 mr-5">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategori
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right animated--fade-in" aria-labelledby="navbarDropdown">
+                                    <asp:LinkButton class="dropdown-item" ID="Button4" runat="server" Text="Makanan" OnClick="Button4_Click"/>
+                                    <asp:LinkButton class="dropdown-item" ID="Button5" runat="server" Text="Elektonik" OnClick="Button5_Click"/>
+
+                                    <!--
+                         <div class="dropdown-divider"></div>
+                         <a class="dropdown-item" href="#">Something else here</a>-->
+                                </div>
+                            </li>
+                            <!-- Sidebar Toggle (Topbar) -->
+                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                                <i class="fa fa-bars"></i>
+                            </button>
+
+                            <!-- Topbar Search -->
+                            <form
+                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group" style="width: 43%">
+                                    <asp:TextBox ID="txtSearch" class="form-control bg-light border-0 small" placeholder="Pencarian..." runat="server"></asp:TextBox>
+                                    <div class="input-group-append">
+                                        <asp:LinkButton runat="server" class="btn btn-primary" type="button" OnClick="Unnamed_Click">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </asp:LinkButton>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="nav-item dropdown no-arrow mx-5">
+                                    <a href="Keranjang.aspx" class="btn btn-info btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </span>
+                                        <span class="text">Keranjang</span>
+                                    </a>
+                            </div>
+                            <!-- Topbar Navbar -->
+                            <ul class="navbar-nav ml-auto mx-5">
+
+                                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                                <li class="nav-item dropdown no-arrow d-sm-none">
+                                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-search fa-fw"></i>
+                                    </a>
+                                    <!-- Dropdown - Messages -->
+                                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                        aria-labelledby="searchDropdown">
+                                        <form class="form-inline mr-auto w-100 navbar-search">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-light border-0 small"
+                                                    placeholder="Search for..." aria-label="Search"
+                                                    aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="button">
+                                                        <i class="fas fa-search fa-sm"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li>
+
+                                
+                                <% If Session("nama_pengguna") IsNot Nothing Then  %>
+                                <!-- nav item - user information -->
+                                <li class="nav-item dropdown no-arrow">
+                                    <a class="nav-link dropdown-toggle" href="#" id="userdropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img class="img-profile rounded-circle"
+                                            src="img/undraw_profile.svg">
+                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><asp:Label ID="labelNama" runat="server"></asp:Label></span>
+                                        
+                                    </a>
+                                    
+                                    <!-- dropdown - user information -->
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                        aria-labelledby="userdropdown">
+                                        <asp:Button ID="Button3" runat="server" class="dropdown-item" Text="Logout" data-toggle="modal" data-target="#logoutmodal">
+                                        </asp:Button>
+                                    </div>
+                                </li>
+                                <% Else %>
+                                <li class="nav-item dropdown no-arrow mx-1">
+                                    <asp:Button ID="Button1" runat="server" Text="Masuk" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" PostBackUrl="~/Login.aspx" />
+                                </li>
+
+                                <li class="nav-item dropdown no-arrow mx-1">
+                                    <asp:Button ID="Button2" runat="server" Text="Daftar" class="d-none d-sm-inline-block btn btn-sm shadow-sm" PostBackUrl="~/Daftar.aspx" />
+                                </li>
+                                <%End IF %>
+                            </ul>
+
+                        </nav>
+                        <!-- End of Topbar -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!-- Bootstrap core JavaScript-->
+                        <script src="vendor/jquery/jquery.min.js"></script>
+                        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+                        <!-- Core plugin JavaScript-->
+                        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+                        <!-- Custom scripts for all pages-->
+                        <script src="js/sb-admin-2.min.js"></script>
+
+                        <!-- Page level plugins -->
+                        <script src="vendor/chart.js/Chart.min.js"></script>
+
+                        <!-- Page level custom scripts -->
+                        <script src="js/demo/chart-area-demo.js"></script>
+                        <script src="js/demo/chart-pie-demo.js"></script>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+    </form>
+    <script type="text/javascript">
+        var counter = 1;
+        setInterval(function () {
+            document.getElementById('radio' + counter).checked = true;
+            counter++;
+            if (counter > 2) {
+                counter = 1;
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
